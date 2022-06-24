@@ -1,5 +1,5 @@
 #!/bin/bash
 
-pyinstaller -F main.py
+pyinstaller -n comprun -F ./src/main.py
 
 
