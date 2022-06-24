@@ -28,4 +28,18 @@ Usage:
     --help
         Provides extended info for usage
 
+## How to install
+
+```bash
+git clone https://github.com/FuexFollets/comp-run
+cd comp-run
+sudo chmod +x ./build.sh
+./build.sh
+```
+
+Then copy `./dist/comprun` to `usr/local/bin` with
+```bash
+cp ./dist/comprun /usr/local/bin
+```
+
 
