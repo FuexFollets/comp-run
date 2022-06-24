@@ -6,26 +6,31 @@ This is a program for quick tests on compiled programs. It compiles a program wi
 
 ## Usage
 
-```bash
-comprun <comprun args ..> <target path: str> <compiler name> <compiler options ..>
-```
+comprun Usage: comprun <comprun flags ..> [file path: str] [compiler name: str] <compiler flags ..>
+    comprun flags [-r, -run (defualt option)] [-k, -keep] [-n <filename>: str] [-p, -pb, -printbin] [-c -command]
 
-### Comrun arguments
+    If no comprun options are selected, only the '-r' option will automatically be selected
 
-#### Help `--help`
+Usage:
 
+    -r, -run
+        Executes the compiled binary
+    
+    -k, -keep
+        Keeps the executed file rather than deleting
+        Is automatically selected if the '-n' flag is used
 
-   <details>
-    <summary>
-      Provides CLI information on usage. Return string (click to expand)
-    </summary>
-   ```code
-  
-   ```
-   </details>
- 
+    -n <filename>: str
+        Names the newly compiled binary as <filename>
+        Automatically selects the '-k' flag
 
-#### Run `-r`, `-run`
+    -p, -pb, -printbin
+        Writes binary file contents to STDOUT
 
+    -c, -command
+        Prints the command used for compilation
+
+    --help
+        Provides extended info for usage
 
 
