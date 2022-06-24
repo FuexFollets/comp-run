@@ -16,8 +16,9 @@ from __future__ import annotations
 import sys
 from os import system
 
-import handlers
+from click import command
 
+import handlers
 
 
 def main():
@@ -33,9 +34,18 @@ def main():
         handlers.program_help()
         return
     
-    sa = handlers.Sort_args(argv)
+    command: handlers.Sort_args = handlers.Sort_args(argv)
 
-    print(sa.get_compile_command())
+    command.compile_program()
+
+    if 'r' in command.options:
+        command.run_binary()
+    
+    if 'p' in command.options:
+        print(command.get_binary())
+    
+    if not ('k' in command.options):
+        command.remove_exec()
 
 
 if __name__ == "__main__":

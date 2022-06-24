@@ -1,5 +1,5 @@
 #!/bin/bash
 
-pyinstaller --onefile main.py
+pyinstaller -F main.py
 
 

@@ -38,9 +38,9 @@ class Sort_args:
         return [self.compiler_name, "-o", self.exec_name, self.path, *self.compiler_options]
         # return f"{self.compiler_name} -o {self.name} {self.path} {self.compiler_options}"
 
-    def get_exec_path(self) -> str:
+    def get_exec_path(self) -> list[str]:
         dir_path = self.path.split('/')[:-5]
-        return dir_path + self.exec_name
+        return dir_path + [self.exec_name]
 
     def compile_program(self) -> subprocess.CompletedProcess:
         return subprocess.run(self.get_compile_command())
@@ -52,7 +52,11 @@ class Sort_args:
         with open(self.get_exec_path()) as exec_file:
             return exec_file.read()
     
+    def run_binary(self) -> subprocess.CompletedProcess:
+        return subprocess.run([''.join(self.get_exec_path())])
 
 
-def program_help() -> None:
-    pass
+def program_help() -> str:
+    return '''
+        
+    '''
