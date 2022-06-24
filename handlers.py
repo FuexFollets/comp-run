@@ -6,7 +6,7 @@ import random
 import string
 
 def generate_random_name() -> str:
-    return "temp_" + ''.join(random.choices(string.ascii_lowercase, k=10))
+    return "temp_" + ''.join(random.choices(string.hexdigits, k=10))
 
 class Sort_args:
     def __init__(self, argv: list[str]):
@@ -18,17 +18,15 @@ class Sort_args:
         
         arg_values = iter(argv[1:])
 
-        unsplit: str = "" 
+        unsplit_options: str = "" 
         for arg in arg_values:
             if arg.startswith('-') == False:
                 self.path = arg
                 break
                 
-            unsplit += arg
+            unsplit_options += arg
 
-        for val in unsplit:
-            if val != '-':
-                self.options.add(val)
+        self.options = {*unsplit_options.split('-')}
 
         self.compiler_name = next(arg_values)
 
@@ -38,9 +36,9 @@ class Sort_args:
         return [self.compiler_name, "-o", self.exec_name, self.path, *self.compiler_options]
         # return f"{self.compiler_name} -o {self.name} {self.path} {self.compiler_options}"
 
-    def get_exec_path(self) -> list[str]:
-        dir_path = self.path.split('/')[:-5]
-        return dir_path + [self.exec_name]
+    def get_exec_path(self) -> str:
+        dir_path = self.path.split('/')[:-1]
+        return '/'.join(dir_path + [self.exec_name])
 
     def compile_program(self) -> subprocess.CompletedProcess:
         return subprocess.run(self.get_compile_command())
@@ -49,11 +47,11 @@ class Sort_args:
         os.remove(self.get_exec_path())
 
     def get_binary(self) -> str:
-        with open(self.get_exec_path()) as exec_file:
+        with open(self.get_exec_path(), mode="rb") as exec_file:
             return exec_file.read()
     
     def run_binary(self) -> subprocess.CompletedProcess:
-        return subprocess.run([''.join(self.get_exec_path())])
+        return subprocess.run([self.get_exec_path()])
 
 
 def program_help() -> str:
