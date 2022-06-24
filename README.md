@@ -6,11 +6,6 @@ This is a program for quick tests on compiled programs. It compiles a program wi
 
 ## Usage
 
-comprun Usage: comprun <comprun flags ..> [file path: str] [compiler name: str] <compiler flags ..>
-    comprun flags [-r, -run (defualt option)] [-k, -keep] [-n <filename>: str] [-p, -pb, -printbin] [-c -command]
-
-    If no comprun options are selected, only the '-r' option will automatically be selected
-
 Usage:
 
     -r, -run
