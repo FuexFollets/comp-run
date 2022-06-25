@@ -1,5 +1,6 @@
 from __future__ import annotations
 from distutils.errors import CCompilerError
+from types import NoneType
 from typing import Any
 import os
 import sys
@@ -15,7 +16,7 @@ import help_docstring
 def generate_random_name() -> str:
     return "temp_" + ''.join(random.choices(string.digits, k=10))
 
-class Sort_args:
+class SortArgs:
     def __init__(self, argv: list[str]):
         self.options: set[str] = set()
         self.compiler_options: list[str] = []
@@ -88,6 +89,28 @@ class Sort_args:
         except:
             pass
             # sys.stderr.write(f"{style_strings.comprun_name} {style_strings.error_label} trouble compiling '{' '.join(self.get_compile_command())}'\n")
+
+def execute_bin(binary_inp: bytes) -> tuple[subprocess.CompletedProcess, str] | None.__class__ | str:
+    temp_file_name: str = generate_random_name()
+
+    try:
+        open(temp_file_name, 'a').close()
+    except:
+        raise RuntimeError("Unable to make temp file")
+
+    try:
+        with open(temp_file_name, "wb") as binfile:
+            binfile.write(binary_inp)
+    except:
+        raise RuntimeError("Unable to write to file")
+
+    try:
+        subprocess.run(["chmod", "+x", temp_file_name])
+        return subprocess.run([temp_file_name])
+    except:
+        pass
+
+
 
 # def program_help() -> None:
 #    print(help_docstring.ds)

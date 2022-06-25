@@ -33,10 +33,13 @@ def main():
         print(help_docstring.full_ds)
         return
 
-    command: handlers.Sort_args | None.__class__ = None
+    if argv[1] == "-e":
+        pass
+
+    command: handlers.SortArgs | None.__class__ = None
 
     try:
-        command = handlers.Sort_args(argv)
+        command = handlers.SortArgs(argv)
     except Exception:
         #raise Exception
         return
